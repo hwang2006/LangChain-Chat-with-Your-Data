@@ -171,18 +171,18 @@ In order to do so, you need to add the "genai" virtual envrionment that you have
 ```
 2. install Jupyter on the virtual environment:
 ```
-(genai) [glogin01]$ conda install jupyter notebook=6.5.4 chardet cchardet 
+(langchain) [glogin01]$ conda install jupyter notebook=6.5.4 chardet cchardet 
 
-(genai) [glogin01]$ pip install jupyter-tensorboard # somehow not compatiable with notebook 7.0.x version  
+(langchain) [glogin01]$ pip install jupyter-tensorboard # somehow not compatiable with notebook 7.0.x version  
 ```
 3. add the virtual environment as a jupyter kernel:
 ```
-(genai) [glogin01]$ pip install ipykernel 
-(genai) [glogin01]$ python -m ipykernel install --user --name langchain
+(langchain) [glogin01]$ pip install ipykernel 
+(langchain) [glogin01]$ python -m ipykernel install --user --name langchain
 ```
 4. check the list of kernels currently installed:
 ```
-(genai) [glogin01]$ jupyter kernelspec list
+(langchain) [glogin01]$ jupyter kernelspec list
 Available kernels:
 python3       /home01/$USER/.local/share/jupyter/kernels/python3
 langchain     /home01/$USER/.local/share/jupyter/kernels/langchain
@@ -190,7 +190,7 @@ langchain     /home01/$USER/.local/share/jupyter/kernels/langchain
 5. launch a jupyter notebook server on a worker node 
 - to deactivate the virtual environment
 ```
-(genai) [glogin01]$ conda deactivate
+(langchain) [glogin01]$ conda deactivate
 ```
 - to create a batch script for launching a jupyter notebook server: 
 ```
