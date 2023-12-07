@@ -176,6 +176,7 @@ In order to do so, you need to add the "genai" virtual envrionment that you have
 (genai) [glogin01]$ pip install jupyter-tensorboard # somehow not compatiable with notebook 7.0.x version  
 ```
 3. add the virtual environment as a jupyter kernel:
+```
 (genai) [glogin01]$ pip install ipykernel 
 (genai) [glogin01]$ python -m ipykernel install --user --name langchain
 ```
