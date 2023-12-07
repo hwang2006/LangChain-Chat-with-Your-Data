@@ -272,3 +272,4 @@ Password or token: $USER    # your account ID on Neuron
 <p align="center"><img src="https://user-images.githubusercontent.com/84169368/218938419-f38c356b-e682-4b1c-9add-6cfc29d53425.png"/></p>
 
 ## Reference
+[[DeepLearning.AI Online Course] LangChain: Chat with Your Data](https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/)  
