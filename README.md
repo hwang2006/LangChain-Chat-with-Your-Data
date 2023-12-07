@@ -230,8 +230,8 @@ module load gcc/10.2.0 cuda/11.6
 
 echo "execute jupyter"
 source ~/.bashrc
-conda activate langchain2
-cd /scratch/qualis/llm/langchain2  # the root/work directory of Jupyter lab/notebook
+conda activate langchain
+cd /scratch/$USER  # the root/work directory of Jupyter lab/notebook
 jupyter lab --ip=0.0.0.0 --port=${PORT_JU} --NotebookApp.token=${USER} #jupyter token: your account ID
 echo "end of the job"
 ```
