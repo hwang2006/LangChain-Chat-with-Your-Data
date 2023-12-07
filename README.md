@@ -125,16 +125,16 @@ conda 23.9.0
 ```
 
 ## Creating a Conda Virtual Environment
-You want to create a virtual envrionment with a python version 3.10 for Generative AI Practices.
+You want to create a virtual envrionment with a python version 3.10 for "LangChain: Chat with Your Data" Practices.
 ```
-[glogin01]$ conda create -n genai python=3.10
+[glogin01]$ conda create -n langchain python=3.10
 Retrieving notices: ...working... done
 Collecting package metadata (current_repodata.json): done
 Solving environment: done
 
 ## Package Plan ##
 
-  environment location: /scratch/qualis/miniconda3/envs/genai
+  environment location: /scratch/qualis/miniconda3/envs/langchain
 
   added / updated specs:
     - python=3.10
@@ -152,11 +152,11 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate genai
+#     $ conda activate langchain
 #
 # To deactivate an active environment, use
 #
-#     $ conda deactivate
+#     $ conda langchain
 ```
 
 ## Running Jupyter
@@ -167,7 +167,7 @@ Executing transaction: done
 In order to do so, you need to add the "genai" virtual envrionment that you have created as a python kernel.
 1. activate the horovod-enabled virtual environment:
 ```
-[glogin01]$ conda activate genai
+[glogin01]$ conda activate langchain
 ```
 2. install Jupyter on the virtual environment:
 ```
@@ -177,14 +177,14 @@ In order to do so, you need to add the "genai" virtual envrionment that you have
 ```
 3. add the virtual environment as a jupyter kernel:
 (genai) [glogin01]$ pip install ipykernel 
-(genai) [glogin01]$ python -m ipykernel install --user --name genai
+(genai) [glogin01]$ python -m ipykernel install --user --name langchain
 ```
 4. check the list of kernels currently installed:
 ```
 (genai) [glogin01]$ jupyter kernelspec list
 Available kernels:
 python3       /home01/$USER/.local/share/jupyter/kernels/python3
-genai         /home01/$USER/.local/share/jupyter/kernels/genai
+langchain     /home01/$USER/.local/share/jupyter/kernels/langchain
 ```
 5. launch a jupyter notebook server on a worker node 
 - to deactivate the virtual environment
@@ -195,16 +195,15 @@ genai         /home01/$USER/.local/share/jupyter/kernels/genai
 ```
 [glogin01]$ cat jupyter_run.sh
 #!/bin/bash
-#SBATCH --comment=pytorch
+#SBATCH --comment=tensorflow
 ##SBATCH --partition=mig_amd_a100_4
 #SBATCH --partition=amd_a100nv_8
 ##SBATCH --partition=cas_v100nv_8
-##SBATCH --partition=cas_v100_4
 #SBATCH --time=12:00:00        # walltime
 #SBATCH --nodes=1             # the number of nodes
 #SBATCH --ntasks-per-node=1   # number of tasks per node
 #SBATCH --gres=gpu:1          # number of gpus per node
-#SBATCH --cpus-per-task=8     # number of cpus per task
+#SBATCH --cpus-per-task=4     # number of cpus per task
 
 #removing the old port forwading
 if [ -e port_forwarding_command ]
@@ -225,12 +224,13 @@ echo "ssh -L localhost:8888:${SERVER}:${PORT_JU} ${USER}@neuron.ksc.re.kr"
 #echo "ssh -L localhost:${PORT_JU}:${SERVER}:${PORT_JU} ${USER}@neuron.ksc.re.kr"
 
 echo "load module-environment"
+#module load gcc/10.2.0 cuda/11.7
 module load gcc/10.2.0 cuda/11.6
 
 echo "execute jupyter"
 source ~/.bashrc
-conda activate genai
-cd /scratch/$USER  # the root/work directory of Jupyter lab/notebook
+conda activate langchain2
+cd /scratch/qualis/llm/langchain2  # the root/work directory of Jupyter lab/notebook
 jupyter lab --ip=0.0.0.0 --port=${PORT_JU} --NotebookApp.token=${USER} #jupyter token: your account ID
 echo "end of the job"
 ```
